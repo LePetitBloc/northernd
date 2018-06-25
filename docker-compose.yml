@@ -1,0 +1,31 @@
+version: '3'
+services:
+  wallet:
+    image: 'lepetitbloc/northernd:1.0.0'
+    restart: always
+    ports:
+      - '60151:60151'
+      - '61150:61150'
+    command:
+      - '-rpcuser=northern-wallet'
+      - '-rpcpassword=3si1ehzh'
+      - '-server=1'
+      - '-listen=0'
+    volumes:
+      - './wallet/:/home/northern/'
+  masternode:
+    image: 'lepetitbloc/northernd:1.0.0'
+    restart: always
+    ports:
+      - '60151:60151'
+      - '61150:61150'
+    command:
+      - '-rpcuser=northern-mn01'
+      - '-rpcpassword=3si1ehzh'
+      - '-rpcallowip=::/0'
+      - '-server=0'
+      - '-listen=1'
+      - '-masternode=1'
+      - '-masternodeprivkey=YourMasternodePrivKey'
+    volumes:
+      - './masternode/:/home/northern/'
